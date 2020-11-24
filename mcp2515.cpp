@@ -14,11 +14,8 @@ const struct MCP2515::RXBn_REGS MCP2515::RXB[N_RXBUFFERS] = {
 
 MCP2515::MCP2515(const uint8_t _CS)
 {
-    SPI.begin();
-
     SPICS = _CS;
     pinMode(SPICS, OUTPUT);
-    endSPI();
 }
 
 void MCP2515::startSPI() {
@@ -33,6 +30,9 @@ void MCP2515::endSPI() {
 
 MCP2515::ERROR MCP2515::reset(void)
 {
+    SPI.end();
+    SPI.begin();
+
     startSPI();
     SPI.transfer(INSTRUCTION_RESET);
     endSPI();
