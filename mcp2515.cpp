@@ -30,7 +30,6 @@ void MCP2515::endSPI() {
 
 MCP2515::ERROR MCP2515::reset(void)
 {
-    SPI.end();
     SPI.begin();
 
     startSPI();
